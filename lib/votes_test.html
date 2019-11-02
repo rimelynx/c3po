@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<script src="votes.js"></script>
+<script src="testing/assert.js"></script>
+<script src="testing/test.js"></script>
+<script>
+test("No votes total", () => {
+  let votes = new Votes();
+  assert.equal(votes.total, 0);
+});
+
+test("Three votes total", () => {
+  let votes = new Votes();
+  votes.add("a");
+  votes.add("b");
+  votes.add("a");
+  assert.equal(votes.total, 3);
+});
+
+test("No votes summary", () => {
+  let votes = new Votes();
+  assert.equal(votes.summarize(), "");
+});
+
+test("Three votes summary", () => {
+  let votes = new Votes();
+  votes.add("b");
+  votes.add("a");
+  votes.add("a");
+  assert.equal(votes.summarize(), "a: 2\nb: 1");
+});
+</script>

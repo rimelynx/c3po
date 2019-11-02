@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>C3PO - Komisja</title>
+    <script src="lib/buffer.js"></script>
+    <script src="lib/crypto.js"></script>
+    <script src="lib/dom.js"></script>
+    <script src="lib/votes.js"></script>
+    <script src="komisja.js"></script>
+  </head>
+  <body>
+    <h1>C3PO - Komisja</h1>
+    <p>
+      Ten klucz do głosowania wyślij wyborcom:
+      <textarea readonly style="width:100%" id="public_key"></textarea>
+    </p>
+    <p>
+      Tutaj dodawaj karty przesłane przez wyborców:
+      <textarea style="width:100%" id="ballot"></textarea>
+      <button id="add">Dodaj</button>
+    </p>
+    <p>
+      Zarejestrowano kart: <span id="count">0</span>
+      <button id="sum">Wyniki</button>
+      <textarea readonly rows="10" style="width:100%" id="summary"></textarea>
+    </p>
+  </body>
+</html>

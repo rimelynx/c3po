@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <title>C3PO - Wyborca</title>
+    <script src="lib/buffer.js"></script>
+    <script src="lib/crypto.js"></script>
+    <script src="lib/dom.js"></script>
+    <script src="wyborca.js"></script>
+  </head>
+  <body>
+    <h1>C3PO - Wyborca</h1>
+    <p>
+      Tutaj wklej klucz do głosowania przesłany przez komisję:
+      <textarea style="width:100%" id="public_key"></textarea>
+    </p>
+    <p>
+      Tutaj wpisz swój głos:
+      <textarea style="width:100%" id="vote"></textarea>
+      <button id="encrypt">Szyfruj</button>
+    </p>
+    <p>
+      Tę kartę wyślij do komisji:
+      <textarea readonly style="width:100%" id="ballot"></textarea>
+    </p>
+  </body>
+</html>

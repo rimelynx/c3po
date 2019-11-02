@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<script src="dom.js"></script>
+<script src="testing/assert.js"></script>
+<script src="testing/test.js"></script>
+<script>
+asyncTest("Content loaded promise", async () => {
+  await dom.contentLoaded;
+  assert.notNull(document.getElementById("input_element"));
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  // The tests below depend on DOM being loaded.  
+  test("Get empty value", () => {
+    assert.equal(dom.getValue("input_element"), "");
+  });
+
+  test("Set and get value", () => {
+    dom.setValue("input_element", "test");
+    assert.equal(dom.getValue("input_element"), "test");
+  });
+
+  test("Set and clear value", () => {
+    dom.setValue("input_element", "test");
+    dom.clearValue("input_element");
+    assert.equal(dom.getValue("input_element"), "");
+  });
+
+  test("Add click listener", () => {
+    let clicked = false;
+    dom.addClickListener("button_element", () => {
+      clicked = true;
+    });
+    document.getElementById("button_element").click();
+    assert.equal(clicked, true);
+  });
+});
+</script>
+<body>
+  <input id="input_element">
+  <button id="button_element">Button</button>
+</body>

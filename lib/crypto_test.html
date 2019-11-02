@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<script src="crypto.js"></script>
+<script src="testing/assert.js"></script>
+<script src="testing/test.js"></script>
+<script>
+function incrementByte(buffer, index) {
+  let uint8View = new Uint8Array(buffer);
+  uint8View[index] = (uint8View[index] + 1) % 256;
+}
+
+asyncTest("End to end", async () => {
+  let keyPair = await crypto.generateKeyPair();
+  let secret = new Uint8Array(13, 27, 43).buffer;
+  let publicKeyData = await crypto.exportPublicKey(keyPair.publicKey);
+  let publicKey = await crypto.importPublicKey(publicKeyData);
+  let ciphertext = await crypto.encrypt(publicKey, secret);
+  let plaintext = await crypto.decrypt(keyPair.privateKey, ciphertext);
+  assert.valuesEqual(new Uint8Array(plaintext),
+                     new Uint8Array(secret));
+});
+
+asyncTest("Key import error", async () => {
+  let keyPair = await crypto.generateKeyPair();
+  let keyData = await crypto.exportPublicKey(keyPair.publicKey);
+  incrementByte(keyData, keyData.byteLength - 1);
+  await assert.asyncThrows(async () => {
+    await crypto.importPublicKey(keyData);
+  }, "DataError");
+});
+
+asyncTest("Decryption error", async () => {
+  let keyPair = await crypto.generateKeyPair();
+  let secret = new Uint8Array(13, 27, 43).buffer;
+  let ciphertext = await crypto.encrypt(keyPair.publicKey, secret);
+  incrementByte(ciphertext, ciphertext.byteLength - 1);
+  await assert.asyncThrows(async () => {
+    await crypto.decrypt(keyPair.privateKey, ciphertext);
+  }, "OperationError");
+});
+</script>

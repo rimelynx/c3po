@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<script src="buffer.js"></script>
+<script src="testing/assert.js"></script>
+<script src="testing/test.js"></script>
+<script>
+// Helper to make an ArrayBuffer from an array.
+function fromArray(bytes) {
+  return new Uint8Array(bytes).buffer;
+}
+
+// Helper to make an array from an ArrayBuffer.
+function toArray(buffer) {
+  return Array.from(new Uint8Array(buffer));
+}
+
+test("Empty buffer to Base64", () => {
+  assert.equal(buffer.toBase64(fromArray([])), "");
+});
+
+test("Short buffer to Base64", () => {
+  assert.equal(buffer.toBase64(fromArray([0, 1])), "AAE=");
+});
+
+test("Empty Base64 to buffer", () => {
+  assert.equal(buffer.fromBase64("").byteLength, 0);
+});
+
+test("Short Base64 to buffer", () => {
+  assert.valuesEqual(toArray(buffer.fromBase64("AAE=")), [0, 1]);
+});
+
+test("Invalid Base64 to buffer", () => {
+  assert.throws(() => {buffer.fromBase64("A===")}, "InvalidCharacterError");
+});
+
+test("Full value range to Base64 and back", () => {
+  let values = [];
+  for (let i = 0; i < 256; i++) {
+    values.push(i);
+  }
+  assert.valuesEqual(
+      toArray(buffer.fromBase64(buffer.toBase64(fromArray(values)))),
+      values);
+});
+
+test("Empty buffer to string", () => {
+  assert.equal(buffer.toString(fromArray([])), "");
+});
+
+test("Short buffer to string", () => {
+  assert.equal(buffer.toString(fromArray([65, 66])), "AB");
+});
+
+test("Empty string to buffer", () => {
+  assert.valuesEqual(toArray(buffer.fromString("")), []);
+});
+
+test("Short string to buffer", () => {
+  assert.valuesEqual(toArray(buffer.fromString("AB")), [65, 66]);
+});
+
+test("Unicode string to buffer and back", () => {
+  let text = "żółw";
+  assert.equal(buffer.toString(buffer.fromString(text)), text);
+});
+</script>
