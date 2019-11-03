@@ -19,8 +19,24 @@ test("To ImageData and back", () => {
 });
 
 asyncTest("Pack and unpack", async () => {
-  let encoded = buffer.fromString("żółw");
+  let encoded = buffer.fromString("Zbłaźń mżystość ględów hiperfunkcją");
   let compressed = await compress.pack(encoded);
+  let decoded = await compress.unpack(compressed);
+  assert.valuesEqual(new Uint8Array(decoded), new Uint8Array(encoded));
+});
+
+asyncTest("Empty data", async () => {
+  let empty = new ArrayBuffer(0);
+  let compressed = await compress.pack(empty);
+  assert.equal(compressed.byteLength, 0);
+  let decoded = await compress.pack(compressed);
+  assert.equal(decoded.byteLength, 0);
+});
+
+asyncTest("Small value optimization", async () => {
+  let encoded = buffer.fromString("Eighteencharacters");
+  let compressed = await compress.pack(encoded);
+  assert.valuesEqual(new Uint8Array(compressed), new Uint8Array(encoded));
   let decoded = await compress.unpack(compressed);
   assert.valuesEqual(new Uint8Array(decoded), new Uint8Array(encoded));
 });
