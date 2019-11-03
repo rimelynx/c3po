@@ -20,7 +20,7 @@ asyncTest("From ImageData and back", async () => {
 
 asyncTest("From compressed data", async () => {
   let pngData = await png.fromEmpty(10, 20);
-  let compressedData = png.getCompressedData(pngData);
+  let compressedData = png.getCompressedDataView(pngData);
   let fromCompressedData = await png.fromCompressedData(10, 20, compressedData);
   assert.valuesEqual(new Uint8Array(pngData),
                      new Uint8Array(fromCompressedData));
@@ -39,7 +39,7 @@ asyncTest("Getting height", async () => {
 asyncTest("Getting compressed data", async () => {
   let pngData = await png.fromEmpty(10, 20);
   let overheadBytes = png.headerBytes + png.chunkHeaderBytes + png.footerBytes;
-  assert.equal(png.getCompressedData(pngData).byteLength,
+  assert.equal(png.getCompressedDataView(pngData).byteLength,
                pngData.byteLength - overheadBytes);
 });
 </script>
