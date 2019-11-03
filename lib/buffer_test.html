@@ -13,12 +13,38 @@ function toArray(buffer) {
   return Array.from(new Uint8Array(buffer));
 }
 
+// Helper to change a byte in an ArrayBuffer.
+function setByte(buffer, offset, value) {
+  new Uint8Array(buffer)[offset] = value;
+}
+
+test("Byte view of an ArrayBuffer", () => {
+  let arrayBuffer = fromArray([1, 2, 3]);
+  let view = buffer.byteView(arrayBuffer);
+  assert.valuesEqual(view, [1, 2, 3]);
+  setByte(arrayBuffer, 1, 0);
+  assert.valuesEqual(view, [1, 0, 3]);
+});
+
+test("Byte view of an Uint8Array", () => {
+  let typedArray = new Uint8Array([1, 2, 3]);
+  let view = buffer.byteView(typedArray);
+  assert.valuesEqual(view, [1, 2, 3]);
+  typedArray[1] = 0;
+  assert.valuesEqual(view, [1, 0, 3]);
+});
+
 test("Empty buffer to Base64", () => {
   assert.equal(buffer.toBase64(fromArray([])), "");
 });
 
 test("Short buffer to Base64", () => {
-  assert.equal(buffer.toBase64(fromArray([0, 1])), "AAE=");
+  assert.equal(buffer.toBase64(fromArray([1, 2])), "AQI=");
+});
+
+test("Buffer view to Base64", () => {
+  let data = fromArray([0, 1, 2, 3]);
+  assert.equal(buffer.toBase64(new Uint8Array(data, 1, 2)), "AQI=");
 });
 
 test("Empty Base64 to buffer", () => {
@@ -51,6 +77,11 @@ test("Short buffer to string", () => {
   assert.equal(buffer.toString(fromArray([65, 66])), "AB");
 });
 
+test("Buffer view to string", () => {
+  let data = fromArray([64, 65, 66, 67]);
+  assert.equal(buffer.toString(new Uint8Array(data, 1, 2)), "AB");
+});
+
 test("Empty string to buffer", () => {
   assert.valuesEqual(toArray(buffer.fromString("")), []);
 });
@@ -64,10 +95,9 @@ test("Unicode string to buffer and back", () => {
   assert.equal(buffer.toString(buffer.fromString(text)), text);
 });
 
-test("Buffer copying", () => {
-  let source = fromArray([10, 20, 30, 40]);
-  let target = fromArray([1, 2, 3, 4, 5, 6]);
-  buffer.copy(source, 1, target, 3, 2);
-  assert.valuesEqual(toArray(target), [1, 2, 3, 20, 30, 6]);
+test("Buffer concatenation", () => {
+  let data = fromArray([1, 2, 3, 4]);
+  let view = new Uint8Array(data, 1, 2);
+  assert.valuesEqual(toArray(buffer.concat([data, view])), [1, 2, 3, 4, 2, 3]);
 });
 </script>
