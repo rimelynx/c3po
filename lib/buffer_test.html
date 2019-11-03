@@ -63,4 +63,11 @@ test("Unicode string to buffer and back", () => {
   let text = "żółw";
   assert.equal(buffer.toString(buffer.fromString(text)), text);
 });
+
+test("Buffer copying", () => {
+  let source = fromArray([10, 20, 30, 40]);
+  let target = fromArray([1, 2, 3, 4, 5, 6]);
+  buffer.copy(source, 1, target, 3, 2);
+  assert.valuesEqual(toArray(target), [1, 2, 3, 20, 30, 6]);
+});
 </script>
