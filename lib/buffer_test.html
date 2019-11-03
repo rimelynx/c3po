@@ -20,7 +20,7 @@ function setByte(buffer, offset, value) {
 
 test("Byte view of an ArrayBuffer", () => {
   let arrayBuffer = fromArray([1, 2, 3]);
-  let view = buffer.byteView(arrayBuffer);
+  let view = buffer.getByteView(arrayBuffer);
   assert.valuesEqual(view, [1, 2, 3]);
   setByte(arrayBuffer, 1, 0);
   assert.valuesEqual(view, [1, 0, 3]);
@@ -28,7 +28,7 @@ test("Byte view of an ArrayBuffer", () => {
 
 test("Byte view of an Uint8Array", () => {
   let typedArray = new Uint8Array([1, 2, 3]);
-  let view = buffer.byteView(typedArray);
+  let view = buffer.getByteView(typedArray);
   assert.valuesEqual(view, [1, 2, 3]);
   typedArray[1] = 0;
   assert.valuesEqual(view, [1, 0, 3]);
