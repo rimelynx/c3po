@@ -5,7 +5,7 @@
 <script src="testing/test.js"></script>
 <script>
 asyncTest("Empty", async () => {
-  let pngData = png.fromEmpty(1, 1);
+  let pngData = await png.fromEmpty(1, 1);
   let imageData = await png.toImageData(pngData);
   assert.valuesEqual(imageData.data, [0, 0, 0, 0]);
 });
@@ -13,31 +13,31 @@ asyncTest("Empty", async () => {
 asyncTest("From ImageData and back", async () => {
   let encoded = new ImageData(1, 1);
   encoded.data.set([10, 20, 30, 255], 0);
-  let pngData = png.fromImageData(encoded);
+  let pngData = await png.fromImageData(encoded);
   let decoded = await png.toImageData(pngData);
   assert.valuesEqual(decoded.data, encoded.data);
 });
 
-test("From compressed data", () => {
-  let pngData = png.fromEmpty(10, 20);
+asyncTest("From compressed data", async () => {
+  let pngData = await png.fromEmpty(10, 20);
   let compressedData = png.getCompressedData(pngData);
-  let fromCompressedData = png.fromCompressedData(10, 20, compressedData);
+  let fromCompressedData = await png.fromCompressedData(10, 20, compressedData);
   assert.valuesEqual(new Uint8Array(pngData),
                      new Uint8Array(fromCompressedData));
 });
 
-test("Getting width", () => {
-  let pngData = png.fromEmpty(10, 20);
+asyncTest("Getting width", async () => {
+  let pngData = await png.fromEmpty(10, 20);
   assert.equal(png.getWidth(pngData), 10);
 });
 
-test("Getting height", () => {
-  let pngData = png.fromEmpty(10, 20);
+asyncTest("Getting height", async () => {
+  let pngData = await png.fromEmpty(10, 20);
   assert.equal(png.getHeight(pngData), 20);
 });
 
-test("Getting compressed data", () => {
-  let pngData = png.fromEmpty(10, 20);
+asyncTest("Getting compressed data", async () => {
+  let pngData = await png.fromEmpty(10, 20);
   let overheadBytes = png.headerBytes + png.chunkHeaderBytes + png.footerBytes;
   assert.equal(png.getCompressedData(pngData).byteLength,
                pngData.byteLength - overheadBytes);
