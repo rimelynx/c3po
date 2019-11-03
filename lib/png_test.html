@@ -38,7 +38,8 @@ test("Getting height", () => {
 
 test("Getting compressed data", () => {
   let pngData = png.fromEmpty(10, 20);
+  let overheadBytes = png.headerBytes + png.chunkHeaderBytes + png.footerBytes;
   assert.equal(png.getCompressedData(pngData).byteLength,
-               pngData.byteLength - png.headerBytes - 8 - png.footerBytes);
+               pngData.byteLength - overheadBytes);
 });
 </script>
