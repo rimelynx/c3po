@@ -29,34 +29,6 @@ test("Byte view of an Uint8Array", () => {
   assert.valuesEqual(view, [1, 0, 3]);
 });
 
-test("Shifting a view left", () => {
-  let arrayBuffer = fromArray([1, 2, 3, 4]);
-  let view = new Uint8Array(arrayBuffer, 1, 2);
-  let shiftedView = buffer.shiftView(view, -1);
-  assert.valuesEqual(buffer.getByteView(shiftedView), [1, 2]);
-});
-
-test("Shifting a view right", () => {
-  let arrayBuffer = fromArray([1, 2, 3, 4]);
-  let view = new Uint8Array(arrayBuffer, 1, 2);
-  let shiftedView = buffer.shiftView(view, 1);
-  assert.valuesEqual(buffer.getByteView(shiftedView), [3, 4]);
-});
-
-test("Expanding a view", () => {
-  let arrayBuffer = fromArray([1, 2, 3, 4]);
-  let view = new Uint8Array(arrayBuffer, 1, 1);
-  let shiftedView = buffer.shiftView(view, 0, 1);
-  assert.valuesEqual(buffer.getByteView(shiftedView), [2, 3]);
-});
-
-test("Shrinking a view", () => {
-  let arrayBuffer = fromArray([1, 2, 3, 4]);
-  let view = new Uint8Array(arrayBuffer, 1, 3);
-  let shiftedView = buffer.shiftView(view, 0, -1);
-  assert.valuesEqual(buffer.getByteView(shiftedView), [2, 3]);
-});
-
 test("Empty buffer to Base64", () => {
   assert.equal(buffer.toBase64(fromArray([])), "");
 });
@@ -116,11 +88,5 @@ test("Short string to buffer", () => {
 test("Unicode string to buffer and back", () => {
   let text = "żółw";
   assert.equal(buffer.toString(buffer.fromString(text)), text);
-});
-
-test("Buffer concatenation", () => {
-  let data = fromArray([1, 2, 3, 4]);
-  let view = new Uint8Array(data, 1, 2);
-  assert.valuesEqual(toArray(buffer.concat([data, view])), [1, 2, 3, 4, 2, 3]);
 });
 </script>
