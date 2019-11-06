@@ -29,9 +29,9 @@ function start() {
       input.value = option;
       let label = document.createElement("label");
       label.htmlFor = input.id;
+      label.className = "after";
       label.textContent = option;
       dom.appendChild(form, input);
-      dom.appendChild(form, " ");
       dom.appendChild(form, label);
       dom.appendChild(form, " ");
     }

@@ -33,6 +33,14 @@ input[type="number"] {
   width: 3em;
 }
 
+label.before:after {
+  content: ":\a0";
+}
+
+label.after:before {
+  content: "\a0";
+}
+
 textarea {
   display: block;
   width: 100%;

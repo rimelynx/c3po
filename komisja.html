@@ -2,6 +2,7 @@
 <html lang="pl">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C3PO - Komisja</title>
     <link rel="stylesheet" href="style.css">
     <script src="lib/buffer.js"></script>
@@ -21,7 +22,7 @@
         <input type="text" name="option">
         <input type="text" name="option">
         <input type="button" id="more" value="Dodaj">
-        <label for="max">Max:</label>&nbsp;<input type="number" id="max" value="1" min="1">
+        <label for="max" class="before">Max</label><input type="number" id="max" value="1" min="1">
         <input type="submit" id="create" value="Utwórz">
       </form>
       <p>
@@ -41,7 +42,7 @@
         <input type="submit" id="add" value="Dodaj">
       </form>
       <form>
-        <label for="count">Zarejestrowano kart:</label>&nbsp;<output id="count">0</output>
+        <label for="count" class="before">Zarejestrowano kart</label><output id="count">0</output>
         <input type="submit" id="sum" value="Wyniki"
          data-confirm="Czy na pewno zakończyć głosowanie i skasować klucz?">
         <textarea rows="10" id="summary" readonly></textarea>
