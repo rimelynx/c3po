@@ -3,29 +3,27 @@
 <script src="testing/assert.js"></script>
 <script src="testing/test.js"></script>
 <script>
-test("No votes total", () => {
+test("Total for no votes", () => {
   let votes = new Votes();
   assert.equal(votes.total, 0);
 });
 
-test("Three votes total", () => {
+test("Total for two votes with three options", () => {
   let votes = new Votes();
-  votes.add("a");
-  votes.add("b");
-  votes.add("a");
-  assert.equal(votes.total, 3);
+  votes.addOne("a");
+  votes.addMultiple(["b", "c"]);
+  assert.equal(votes.total, 2);
 });
 
-test("No votes summary", () => {
+test("Summary for no votes", () => {
   let votes = new Votes();
   assert.equal(votes.summarize(), "");
 });
 
-test("Three votes summary", () => {
+test("Summary for two votes with three options", () => {
   let votes = new Votes();
-  votes.add("b");
-  votes.add("a");
-  votes.add("a");
-  assert.equal(votes.summarize(), "a: 2\nb: 1");
+  votes.addOne("b");
+  votes.addMultiple(["a", "b"]);
+  assert.equal(votes.summarize(), "b: 2\na: 1");
 });
 </script>
