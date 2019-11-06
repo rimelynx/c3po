@@ -8,9 +8,8 @@ function start(args) {
   dom.addClickListener("create", createPoll);
 
   function addOption() {
-    let option = document.createElement("input");
-    option.name = "option";
     let button = document.getElementById("more");
+    let option = document.getElementsByName("option")[0].cloneNode(true);
     dom.prependSibling(button, option);
     dom.prependSibling(button, " ");
   }

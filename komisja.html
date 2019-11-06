@@ -18,11 +18,10 @@
         Podaj dostępne opcje aby utworzyć głosowanie:
       </p>
       <form onsubmit="return false">
-        <input name="option">
-        <input name="option">
+        <input type="text" name="option">
+        <input type="text" name="option">
         <input type="button" id="more" value="Dodaj">
-        <input type="checkbox" id="multi" name="multi">
-        <label for="multi">Wybór wielokrotny</label>
+        <label for="max">Max:</label>&nbsp;<input type="number" id="max" value="1" min="1">
         <input type="submit" id="create" value="Utwórz">
       </form>
       <p>
@@ -42,7 +41,7 @@
         <input type="submit" id="add" value="Dodaj">
       </form>
       <form onsubmit="return false">
-        Zarejestrowano kart: <span id="count">0</span>
+        <label>Zarejestrowano kart:&nbsp;<span id="count">0</span></label>
         <input type="submit" id="sum" value="Wyniki">
         <textarea readonly rows="10" style="width:100%" id="summary"></textarea>
       </form>
