@@ -1,7 +1,11 @@
+body {
+  font-family: system-ui;
+}
+
 div.section {
   position: relative;
   border: 1px solid;
-  margin: 1.5em 0 1em 0;
+  margin: 2em 0 1em 0;
   padding: 0.5em 0.7em 0 0.7em;
 }
 
