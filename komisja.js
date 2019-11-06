@@ -4,6 +4,7 @@ function start(args) {
   let privateKey = null;
   let votes = null;
 
+  dom.preventFormSubmissions();
   dom.addClickListener("more", addOption);
   dom.addClickListener("create", createPoll);
 
@@ -66,8 +67,10 @@ function start(args) {
   }
 
   function summarizeVotes() {
-    forgetKey();
-    dom.setValue("summary", votes.summarize());
+    if (window.confirm(document.getElementById("sum").dataset.confirm)) {
+      forgetKey();
+      dom.setValue("summary", votes.summarize());
+    }
   }
 
   function forgetKey() {

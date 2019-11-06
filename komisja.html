@@ -17,7 +17,7 @@
       <p>
         Podaj dostępne opcje aby utworzyć głosowanie:
       </p>
-      <form onsubmit="return false">
+      <form>
         <input type="text" name="option">
         <input type="text" name="option">
         <input type="button" id="more" value="Dodaj">
@@ -36,13 +36,14 @@
       <p>
         Tutaj dodawaj karty przesłane przez wyborców:
       </p>
-      <form onsubmit="return false">
+      <form>
         <textarea id="ballot"></textarea>
         <input type="submit" id="add" value="Dodaj">
       </form>
-      <form onsubmit="return false">
+      <form>
         <label>Zarejestrowano kart:&nbsp;<span id="count">0</span></label>
-        <input type="submit" id="sum" value="Wyniki">
+        <input type="submit" id="sum" value="Wyniki"
+         data-confirm="Czy na pewno zakończyć głosowanie i skasować klucz?">
         <textarea readonly rows="10" style="width:100%" id="summary"></textarea>
       </form>
     </div>

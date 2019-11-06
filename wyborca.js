@@ -3,6 +3,7 @@ dom.contentLoaded.then(start);
 function start() {
   let publicKey = null;
 
+  dom.preventFormSubmissions();
   dom.addClickListener("show", showForm);
 
   function showForm() {
