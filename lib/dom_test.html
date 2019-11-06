@@ -25,6 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
     assert.equal(dom.getValue("input_element"), "");
   });
 
+  test("Prevent form submissions", () => {
+    dom.preventFormSubmissions();
+    document.getElementById("submit_element").click();
+    // The page would have reloaded if this didn't work.
+  });
+
   test("Add click listener", () => {
     let clicked = false;
     dom.addClickListener("button_element", () => {
@@ -76,6 +82,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 <body>
-  <input id="input_element">
-  <button id="button_element">Button</button>
+  <form id="form">
+    <input id="input_element">
+    <button type="button" id="button_element">Button</button>
+    <button type="submit" id="submit_element">Submit</button>
+  </form>
 </body>
