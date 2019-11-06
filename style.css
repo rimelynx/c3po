@@ -19,6 +19,12 @@ form {
   margin: 1em 0 1em 0;
 }
 
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  box-sizing: border-box;
+}
+
 input[type="text"] {
   width: 12em;
 }
@@ -30,7 +36,8 @@ input[type="number"] {
 textarea {
   display: block;
   width: 100%;
-  box-sizing: border-box;
   margin: 0.5em 0 0.5em 0;
   resize: vertical;
+  overflow: auto;
+  text-size-adjust: none;
 }

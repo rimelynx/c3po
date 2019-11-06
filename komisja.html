@@ -28,7 +28,7 @@
         Ten klucz do głosowania wyślij wyborcom:
       </p>
       <form>
-        <textarea readonly id="key"></textarea>
+        <textarea rows="3" id="key" readonly></textarea>
       </form>
     </div>
     <div class="section">
@@ -37,14 +37,14 @@
         Tutaj dodawaj karty przesłane przez wyborców:
       </p>
       <form>
-        <textarea id="ballot"></textarea>
+        <textarea rows="3" id="ballot"></textarea>
         <input type="submit" id="add" value="Dodaj">
       </form>
       <form>
         <label for="count">Zarejestrowano kart:</label>&nbsp;<output id="count">0</output>
         <input type="submit" id="sum" value="Wyniki"
          data-confirm="Czy na pewno zakończyć głosowanie i skasować klucz?">
-        <textarea readonly rows="10" style="width:100%" id="summary"></textarea>
+        <textarea rows="10" id="summary" readonly></textarea>
       </form>
     </div>
   </body>
