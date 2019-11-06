@@ -12,17 +12,32 @@
   <body>
     <h1>C3PO - Komisja</h1>
     <p>
+      Podaj dostępne opcje aby utworzyć głosowanie:
+      <form onsubmit="return false">
+        <input name="option">
+        <input name="option">
+        <input type="button" id="more" value="Dodaj">
+        <input type="checkbox" id="multi" name="multi">
+        <label for="multi">Wybór wielokrotny</label>
+        <input type="submit" id="create" value="Utwórz">
+      </form>
+    </p>
+    <p>
       Ten klucz do głosowania wyślij wyborcom:
-      <textarea readonly style="width:100%" id="public_key"></textarea>
+      <textarea readonly style="width:100%" id="key"></textarea>
     </p>
     <p>
       Tutaj dodawaj karty przesłane przez wyborców:
-      <textarea style="width:100%" id="ballot"></textarea>
-      <button id="add">Dodaj</button>
+      <form onsubmit="return false">
+        <textarea style="width:100%" id="ballot"></textarea>
+        <input type="submit" id="add" value="Dodaj">
+      </form>
     </p>
     <p>
-      Zarejestrowano kart: <span id="count">0</span>
-      <button id="sum">Wyniki</button>
+      <form onsubmit="return false">
+        Zarejestrowano kart: <span id="count">0</span>
+        <input type="submit" id="sum" value="Wyniki">
+      </form>
       <textarea readonly rows="10" style="width:100%" id="summary"></textarea>
     </p>
   </body>

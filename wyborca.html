@@ -11,13 +11,18 @@
   <body>
     <h1>C3PO - Wyborca</h1>
     <p>
-      Tutaj wklej klucz do głosowania przesłany przez komisję:
-      <textarea style="width:100%" id="public_key"></textarea>
+      Tutaj wklej przesłany przez komisję klucz do głosowania by zobaczyć
+      formularz:
+      <form>
+        <textarea style="width:100%" id="key"></textarea>
+        <input type="submit" id="show" value="Pokaż">
+      </form>
     </p>
     <p>
-      Tutaj wpisz swój głos:
-      <textarea style="width:100%" id="vote"></textarea>
-      <button id="encrypt">Szyfruj</button>
+      Wypełnij formularz i go zaszyfruj by otrzymać kartę:
+      <form id="vote">
+        <input type="submit" id="encrypt" value="Szyfruj">
+      </form>
     </p>
     <p>
       Tę kartę wyślij do komisji:
