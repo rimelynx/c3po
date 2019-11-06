@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>C3PO - Komisja</title>
+    <link rel="stylesheet" href="style.css">
     <script src="lib/buffer.js"></script>
     <script src="lib/crypto.js"></script>
     <script src="lib/dom.js"></script>
@@ -11,34 +12,42 @@
   </head>
   <body>
     <h1>C3PO - Komisja</h1>
-    <p>
-      Podaj dostępne opcje aby utworzyć głosowanie:
-      <form onsubmit="return false">
-        <input name="option">
-        <input name="option">
-        <input type="button" id="more" value="Dodaj">
-        <input type="checkbox" id="multi" name="multi">
-        <label for="multi">Wybór wielokrotny</label>
-        <input type="submit" id="create" value="Utwórz">
-      </form>
-    </p>
-    <p>
-      Ten klucz do głosowania wyślij wyborcom:
-      <textarea readonly style="width:100%" id="key"></textarea>
-    </p>
-    <p>
-      Tutaj dodawaj karty przesłane przez wyborców:
-      <form onsubmit="return false">
-        <textarea style="width:100%" id="ballot"></textarea>
-        <input type="submit" id="add" value="Dodaj">
-      </form>
-    </p>
-    <p>
-      <form onsubmit="return false">
-        Zarejestrowano kart: <span id="count">0</span>
-        <input type="submit" id="sum" value="Wyniki">
-      </form>
-      <textarea readonly rows="10" style="width:100%" id="summary"></textarea>
-    </p>
+    <div class="section">
+      <h2>Formularz</h2>
+      <p>
+        Podaj dostępne opcje aby utworzyć głosowanie:
+        <form onsubmit="return false">
+          <input name="option">
+          <input name="option">
+          <input type="button" id="more" value="Dodaj">
+          <input type="checkbox" id="multi" name="multi">
+          <label for="multi">Wybór wielokrotny</label>
+          <input type="submit" id="create" value="Utwórz">
+        </form>
+      </p>
+      <p>
+        Ten klucz do głosowania wyślij wyborcom:
+        <form>
+          <textarea readonly id="key"></textarea>
+        </form>
+      </p>
+    </div>
+    <div class="section">
+      <h2>Głosowanie</h2>
+      <p>
+        Tutaj dodawaj karty przesłane przez wyborców:
+        <form onsubmit="return false">
+          <textarea id="ballot"></textarea>
+          <input type="submit" id="add" value="Dodaj">
+        </form>
+      </p>
+      <p>
+        <form onsubmit="return false">
+          Zarejestrowano kart: <span id="count">0</span>
+          <input type="submit" id="sum" value="Wyniki">
+          <textarea readonly rows="10" style="width:100%" id="summary"></textarea>
+        </form>
+      </p>
+    </div>
   </body>
 </html>
