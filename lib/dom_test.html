@@ -9,7 +9,7 @@ asyncTest("Content loaded promise", async () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  // The tests below depend on DOM being loaded.  
+  // The tests below depend on DOM being loaded.
   test("Get empty value", () => {
     assert.equal(dom.getValue("input_element"), "");
   });
@@ -32,6 +32,46 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     document.getElementById("button_element").click();
     assert.equal(clicked, true);
+    dom.removeListeners("button_element");
+  });
+
+  test("Remove listeners", () => {
+    let clicked = false;
+    dom.addClickListener("button_element", () => {
+      clicked = true;
+    });
+    dom.removeListeners("button_element");
+    document.getElementById("button_element").click();
+    assert.equal(clicked, false);
+  });
+
+  test("Prepend element", () => {
+    let input = document.getElementById("input_element");
+    let button = document.getElementById("button_element")
+    dom.prependSibling(input, button);
+    assert.equal(input.previousSibling, button);
+    dom.prependSibling(button, input);
+    assert.equal(button.previousSibling, input);
+  });
+
+  test("Prepend text", () => {
+    let input = document.getElementById("input_element");
+    dom.prependSibling(input, "prep");
+    assert.equal(input.previousSibling.textContent, "prep");
+  });
+
+  test("Append child element", () => {
+    let span = document.createElement("span");
+    let input = document.getElementById("input_element");
+    dom.appendChild(span, input);
+    assert.equal(input.parentNode, span);
+  });
+
+  test("Append child text", () => {
+    let button = document.getElementById("button_element");
+    button.textContent = "foo";
+    dom.appendChild(button, "bar");
+    assert.equal(button.textContent, "foobar");
   });
 });
 </script>
