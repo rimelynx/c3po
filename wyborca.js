@@ -22,7 +22,7 @@ function start() {
     let n = 1;
     for (let option of poll.options) {
       let input = document.createElement("input");
-      input.type = poll.multi ? "checkbox" : "radio";
+      input.type = (poll.max > 1) ? "checkbox" : "radio";
       input.name = "option";
       input.id = "option" + n++;
       input.value = option;
