@@ -16,23 +16,23 @@
       <p>
         Tutaj wklej przesłany przez komisję klucz do głosowania by zobaczyć
         formularz:
-        <form onsubmit="return false">
-          <textarea id="key"></textarea>
-          <input type="submit" id="show" value="Pokaż">
-        </form>
       </p>
+      <form onsubmit="return false">
+        <textarea id="key"></textarea>
+        <input type="submit" id="show" value="Pokaż">
+      </form>
       <p>
         Wypełnij formularz i go zaszyfruj by otrzymać kartę:
-        <form id="vote" onsubmit="return false">
-          <input type="submit" id="encrypt" value="Szyfruj">
-        </form>
       </p>
+      <form id="vote" onsubmit="return false">
+        <input type="submit" id="encrypt" value="Szyfruj">
+      </form>
       <p>
         Tę kartę wyślij do komisji:
-        <form>
-          <textarea readonly id="ballot"></textarea>
-        </form>
       </p>
+      <form>
+        <textarea readonly id="ballot"></textarea>
+      </form>
     </div>
   </body>
 </html>
