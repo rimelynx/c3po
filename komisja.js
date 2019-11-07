@@ -1,3 +1,5 @@
+'use strict';
+
 dom.contentLoaded.then(start);
 
 function start(args) {

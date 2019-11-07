@@ -1,3 +1,5 @@
+'use strict';
+
 dom.contentLoaded.then(start);
 
 function start() {
@@ -48,7 +50,7 @@ function start() {
   function encryptVote() {
     let vote = [];
     let options = document.getElementsByName("option");
-    for (option of options) {
+    for (let option of options) {
       if (option.checked) {
         vote.push(option.value);
       }
