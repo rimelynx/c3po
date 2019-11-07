@@ -42,6 +42,19 @@ document.addEventListener("DOMContentLoaded", () => {
     dom.removeListeners("button_element");
   });
 
+  test("Add Enter listener", () => {
+    let pressed = false;
+    dom.addEnterListener("input_element", () => {
+      pressed = true;
+    });
+    let event = new KeyboardEvent("keydown", {
+      key: "Enter"
+    });
+    document.getElementById("input_element").dispatchEvent(event);
+    assert.equal(pressed, true);
+    dom.removeListeners("input_element");
+  });
+
   test("Remove listeners", () => {
     let clicked = false;
     dom.addClickListener("button_element", () => {

@@ -6,17 +6,15 @@ function start() {
   let publicKey = null;
 
   dom.preventFormSubmissions();
+  dom.addEnterListener("key", showForm);
   dom.addClickListener("show", showForm);
   dom.addClickListener("copy", copyBallot);
 
   function showForm() {
-    dom.clearValue("ballot");
-
     let parts = dom.getValue("key").split("_");
     if (parts.length != 2) {
       return;
     }
-
     let poll = JSON.parse(buffer.toString(buffer.fromBase64(parts[0])));
     let form = document.getElementById("vote");
     let button = document.getElementById("encrypt").cloneNode(true);
@@ -40,6 +38,7 @@ function start() {
       dom.appendChild(form, div);
     }
     dom.appendChild(form, button);
+    dom.clearValue("ballot");
 
     crypto.importPublicKey(buffer.fromBase64(parts[1])).then(key => {
       publicKey = key;
@@ -58,6 +57,7 @@ function start() {
     var plaintext = buffer.fromString(JSON.stringify(vote));
     return crypto.encrypt(publicKey, plaintext).then(ciphertext => {
       dom.setValue("ballot", buffer.toBase64(ciphertext));
+      copyBallot();
     });
   }
 

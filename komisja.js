@@ -10,6 +10,9 @@ function start(args) {
   dom.addClickListener("more", addOption);
   dom.addClickListener("copy", copyKey);
   dom.addClickListener("create", createPoll);
+  dom.addEnterListener("ballot", addVote);
+  dom.addClickListener("add", addVote);
+  dom.addClickListener("sum", summarizeVotes);
 
   function addOption() {
     let button = document.getElementById("more");
@@ -50,8 +53,7 @@ function start(args) {
     }).then(publicKeyData => {
       dom.setValue("key", buffer.toBase64(pollData) + "_" +
                           buffer.toBase64(publicKeyData));
-      dom.addClickListener("add", addVote);
-      dom.addClickListener("sum", summarizeVotes);
+      copyKey();
     });
   }
 
@@ -61,7 +63,7 @@ function start(args) {
 
   function addVote() {
     let ballot = dom.getValue("ballot");
-    if (!ballot) {
+    if (!ballot || !privateKey) {
       return;
     }
     let ciphertext = buffer.fromBase64(ballot);
@@ -74,18 +76,17 @@ function start(args) {
   }
 
   function summarizeVotes() {
-    if (window.confirm(document.getElementById("sum").dataset.confirm)) {
-      forgetKey();
+    if (privateKey &&
+        !window.confirm(document.getElementById("sum").dataset.confirm)) {
+      return;
+    }
+    forgetKey();
+    if (votes) {
       dom.setValue("summary", votes.summarize());
     }
   }
 
   function forgetKey() {
-    if (!privateKey) {
-      return;
-    }
-    dom.removeListeners("sum");
-    dom.removeListeners("add");
     privateKey = null;
     dom.clearValue("key");
   }
