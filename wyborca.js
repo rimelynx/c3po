@@ -5,6 +5,7 @@ function start() {
 
   dom.preventFormSubmissions();
   dom.addClickListener("show", showForm);
+  dom.addClickListener("copy", copyBallot);
 
   function showForm() {
     dom.clearValue("ballot");
@@ -56,5 +57,9 @@ function start() {
     return crypto.encrypt(publicKey, plaintext).then(ciphertext => {
       dom.setValue("ballot", buffer.toBase64(ciphertext));
     });
+  }
+
+  function copyBallot() {
+    dom.copyToClipboard("ballot");
   }
 }

@@ -6,6 +6,7 @@ function start(args) {
 
   dom.preventFormSubmissions();
   dom.addClickListener("more", addOption);
+  dom.addClickListener("copy", copyKey);
   dom.addClickListener("create", createPoll);
 
   function addOption() {
@@ -50,6 +51,10 @@ function start(args) {
       dom.addClickListener("add", addVote);
       dom.addClickListener("sum", summarizeVotes);
     });
+  }
+
+  function copyKey() {
+    dom.copyToClipboard("key");
   }
 
   function addVote() {
