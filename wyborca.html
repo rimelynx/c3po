@@ -4,37 +4,68 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>C3PO - Wyborca</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/w3.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/font-awesome.all.min.css">
     <script src="lib/buffer.js"></script>
     <script src="lib/crypto.js"></script>
     <script src="lib/dom.js"></script>
     <script src="wyborca.js"></script>
   </head>
-  <body>
-    <h1>C3PO - Wyborca</h1>
-    <div class="section">
-      <h2>Głosowanie</h2>
-      <p>
-        Tutaj wklej przesłany przez komisję klucz do głosowania by zobaczyć
-        formularz:
-      </p>
-      <form>
-        <textarea rows="3" id="key"></textarea>
-        <input type="submit" id="show" value="Pokaż">
-      </form>
-      <p>
-        Wypełnij formularz i go zaszyfruj by otrzymać kartę:
-      </p>
-      <form id="vote">
-        <input type="submit" id="encrypt" value="Szyfruj">
-      </form>
-      <p>
-        Tę kartę wyślij do komisji:
-      </p>
-      <form>
-        <textarea rows="3" id="ballot" readonly></textarea>
-        <input type="button" id="copy" value="Kopiuj">
-      </form>
+  <body class="theme-background-far">
+    <div class="w3-content theme-background-close">
+      <header class="w3-container">
+        <h1 class="">C3PO - Wyborca</h1>
+      </header>
+      <main class="theme-base w3-container">
+        <section class="w3-section">
+          <h2>Wczytaj dane głosowania</h2>
+          <p>
+            Tutaj wklej przesłany przez komisję klucz by wczytać
+            formularz głosowania:
+          </p>
+          <form>
+            <textarea id="key" class="w3-block w3-responsive"></textarea>
+            <div class="">
+              <button id="show" class="w3-block">
+                <i class="fas fa-file-import"></i>Wczytaj
+              </button>
+            </div>
+          </form>
+        </section>
+        <section class="w3-section">
+          <h2>Oddaj głos</h2>
+          <p>
+            Wypełnij formularz i wciśnij przycisk "Szyfruj" aby wygenerować
+            zaszyfrowaną kartę głosowania:
+          </p>
+          <form id="vote" class="almu-vote-form">
+            <div class="almu-form-placeholder w3-center w3-panel">
+              Tutaj zostanie wygenerowany formularz gdy tylko
+              wczytasz dane głosowania.
+            </div>
+            <button id="encrypt" class="w3-block">
+              <i class="fas fa-key"></i>Szyfruj
+            </button>
+          </form>
+        </section>
+        <section class="w3-section">
+          <h2>Wyślij kartę głosowania</h2>
+          <p>
+            Skopiuj poniższą kartę głosowania i wyślij ją do komisji
+            skrutacyjnej:
+          </p>
+          <form>
+            <textarea id="ballot" class="w3-block w3-responsive" readonly>
+            </textarea>
+            <button id="copy" class="w3-block">
+              <i class="fas fa-clipboard"></i>Kopiuj
+            </button>
+          </form>
+        </section>
+      </main>
+      <footer class="theme-background-close w3-container w3-padding"></footer>
     </div>
   </body>
 </html>
