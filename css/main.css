@@ -133,8 +133,7 @@ footer {
 	-o-transition: 0.4s;
 }
 
-.almu-vote-form div:hover,
-.almu-vote-form div:hover {
+.almu-vote-form div:hover:not(.almu-form-placeholder) {
 	color: #F1D167;
 }
 
