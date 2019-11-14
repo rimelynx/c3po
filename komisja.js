@@ -3,8 +3,8 @@
 dom.contentLoaded.then(start);
 
 function start(args) {
-  let privateKey = null;
-  let votes = null;
+  let privateKey;
+  let votes;
 
   dom.preventFormSubmissions();
   dom.addClickListener("more", addOption);
@@ -15,8 +15,9 @@ function start(args) {
   dom.addClickListener("sum", summarizeVotes);
 
   function addOption() {
+    let form = document.getElementById("vote");
     let button = document.getElementById("more");
-    let option = document.getElementsByName("option")[0].cloneNode(true);
+    let option = form.querySelector('input[name="option"]').cloneNode(true);
     option.value = "";
     dom.prependSibling(button, option);
     dom.prependSibling(button, " ");
@@ -25,7 +26,7 @@ function start(args) {
   function newVote() {
     votes = new Votes(document.getElementById("max").value);
     dom.clearValue("summary");
-    document.getElementById("count").textContent = 0;
+    dom.setValue("count", 0);
   }
 
   function createPoll() {
@@ -69,7 +70,7 @@ function start(args) {
     let ciphertext = buffer.fromBase64(ballot);
     crypto.decrypt(privateKey, ciphertext).then(plaintext => {
       votes.add(JSON.parse(buffer.toString(plaintext)));
-      document.getElementById("count").textContent = votes.total;
+      dom.setValue("count", votes.total);
       // Clear the ballot after reading to avoid repeated additions.
       dom.clearValue("ballot");
     });

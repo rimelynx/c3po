@@ -3,7 +3,7 @@
 dom.contentLoaded.then(start);
 
 function start() {
-  let publicKey = null;
+  let publicKey;
 
   dom.preventFormSubmissions();
   dom.addEnterListener("key", showForm);
@@ -22,6 +22,7 @@ function start() {
       form.removeChild(form.lastChild);
     }
     let n = 1;
+    let fieldset = document.createElement("fieldset");
     for (let option of poll.options) {
       let input = document.createElement("input");
       input.type = (poll.max > 1) ? "checkbox" : "radio";
@@ -35,8 +36,9 @@ function start() {
       let div = document.createElement("div");
       dom.appendChild(div, input);
       dom.appendChild(div, label);
-      dom.appendChild(form, div);
+      dom.appendChild(fieldset, div);
     }
+    dom.appendChild(form, fieldset);
     dom.appendChild(form, button);
     dom.clearValue("ballot");
 
@@ -48,11 +50,9 @@ function start() {
 
   function encryptVote() {
     let vote = [];
-    let options = document.getElementsByName("option");
-    for (let option of options) {
-      if (option.checked) {
-        vote.push(option.value);
-      }
+    let form = document.getElementById("vote");
+    for (let option of form.querySelectorAll('input[name="option"]:checked')) {
+      vote.push(option.value);
     }
     var plaintext = buffer.fromString(JSON.stringify(vote));
     return crypto.encrypt(publicKey, plaintext).then(ciphertext => {

@@ -1,0 +1,59 @@
+form {
+  margin: 1em 0;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+  margin: 1em 0;
+}
+
+label.before::after {
+  content: ":\a0";
+}
+
+label.after::before {
+  content: "\a0";
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  box-sizing: border-box;
+}
+
+button .icon {
+  opacity: 0.4;
+}
+
+input[readonly], textarea[readonly] {
+	background-color: whitesmoke;
+}
+
+input[type="text"] {
+  width: 12em;
+}
+
+input[type="number"] {
+  width: 3em;
+}
+
+input[type="checkbox"], input[type="radio"] {
+  margin: 0.3em;
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  margin: 1em 0;
+  resize: vertical;
+  overflow: auto;
+  text-size-adjust: none;
+}
+
+div.placeholder {
+  border-width: thin;
+  border-style: dashed;
+  padding: 1em;
+  margin: 1em;
+}

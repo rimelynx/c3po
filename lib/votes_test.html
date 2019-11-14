@@ -2,6 +2,7 @@
 <title>Tests for votes.js</title>
 <script src="votes.js"></script>
 <script src="testing/assert.js"></script>
+<script src="testing/base.js"></script>
 <script src="testing/test.js"></script>
 <script>
 test("Total for no votes", () => {
@@ -14,6 +15,12 @@ test("Total for two votes with three options", () => {
   votes.add(["a"]);
   votes.add(["b", "c"]);
   assert.equal(votes.total, 2);
+});
+
+test("Total for an empty vote", () => {
+  let votes = new Votes(1);
+  votes.add([]);
+  assert.equal(votes.total, 1);
 });
 
 test("Total for an invalid vote", () => {
@@ -32,6 +39,12 @@ test("Summary for two votes with three options", () => {
   votes.add(["b"]);
   votes.add(["a", "b"]);
   assert.equal(votes.summarize(), "b: 2\na: 1");
+});
+
+test("Summary for an empty vote", () => {
+  let votes = new Votes(1);
+  votes.add([]);
+  assert.equal(votes.summarize(), "-: 1");
 });
 
 test("Summary for an invalid vote", () => {
