@@ -6,25 +6,46 @@ html {
 body {
   font-family: system-ui;
   counter-reset: sections;
+  margin: 0;
+}
+
+h1, h2 {
+  font-weight: normal;
+  margin: 0;
+}
+
+h1, main, footer {
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+h1 {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+h2 {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+main {
+  padding-bottom: 16px;
 }
 
 section {
   counter-increment: sections;
-  border: thin solid;
-  margin: 2em 0 1em 0;
-  padding: 0.7em 0.7em 0.3em 0.7em;
-}
-
-section header {
-  margin: -1.7em 0 0 0;
 }
 
 section h2:before {
   content: counter(sections) ".\a0";
 }
 
-section h2 {
-  display: inline;
-  padding: 0 0.2em;
-  background: white;
+p {
+  margin: 8px 0;
+}
+
+footer {
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
